@@ -1,9 +1,9 @@
 import os
 import csv
 
-file = os.path.join("..", "Resources", "budget_data.csv")
+csvpath = os.path.join("..", "Resources", "budget_data.csv")
 
-with open(file, newline="") as csvfile:
+with open(csvpath, newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
 
     csv_header = next(csvfile)
@@ -17,6 +17,11 @@ greatest_dec_date = ""
 for row in csvreader:
     total_months.append(int(row[0]))   
     net_profit_loss.append(int(row[1]))
+
+    print("Financial Analysis")
+    print("---------------------------------------------------")
+    print("Total Months: " + len(total_months))
+    print("Net Total: $" + sum(net_profit_loss))
     
 for x in range(1, len(net_profit_loss)):
         
@@ -30,10 +35,7 @@ for x in range(1, len(net_profit_loss)):
     greatest_dec = min(difference)
     greatest_dec_date = str(total_months[differences.index(min(differences))])
         
-    print("Financial Analysis")
-    print("---------------------------------------------------")
-    print("Total Months: " + len(total_months))
-    print("Net Total: $" + sum(net_profit_loss))
+    
     print("Average Change: $", round(average_change))  
     print("Greatest Increase: ", greatest_inc_date, "($", greatest_inc,")")
     print("Greatest Decrease: ", greatest_dec_date, "($", greatest_dec,")")
