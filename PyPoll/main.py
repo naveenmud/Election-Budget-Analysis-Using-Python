@@ -1,7 +1,7 @@
 import os
 import csv
 
-csvpath = os.path.join("..", "Resources", "election_data.csv")
+csvpath = os.path.join(".", "Resources", "election_data.csv")
 
 with open(csvpath, newline="") as csvfile:
 
@@ -35,7 +35,7 @@ with open(csvpath, newline="") as csvfile:
         votes_cast += candidates[candidate]
     
         vote_percentage = (candidates[candidate])/(count) * (100)
-        print(f"{candidate}: {int(percent_of_votes)}% {votes_cast}")
+        print(f"{candidate}: {int(vote_percentage)}% {votes_cast}")
         
         if candidates[candidate] > most_votes:
             most_voted = candidate
@@ -43,16 +43,17 @@ with open(csvpath, newline="") as csvfile:
         
     print("----------------------------------------")
     
-    print(f"Winner: {Most_Voted}")
+    print(f"Winner: {most_voted}")
     
     print("----------------------------------------")
 
-with open("budget_analysis.txt", "w") as text_file:
-    print("Election Results"\n
-          "----------------------------------------"\n
-          f"Total Votes: {count}"\n
-          "----------------------------------------"\n
-          f"{candidate}: {int(percent_of_votes)}% {votes_cast}"\n  
-          "----------------------------------------"\n
-          f"Winner: {Most_Voted}"\n
-          "----------------------------------------", file = text_file)
+with open("election_results.txt", "w") as text_file:
+    print("Election Results", file = text_file)
+    print("----------------------------------------", file = text_file)
+    print(f"Total Votes: {count}", file = text_file)
+    print("----------------------------------------", file = text_file)
+    for candidate in candidates:
+        print(f"{candidate}: {int(vote_percentage)}% {votes_cast}", file = text_file)
+    print("----------------------------------------", file = text_file)
+    print(f"Winner: {most_voted}", file = text_file)
+    print("----------------------------------------", file = text_file)
